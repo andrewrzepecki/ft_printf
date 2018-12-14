@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/13 16:13:43 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/14 18:15:43 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,93 @@ void			print_flags(t_flags flags)
 	printf("format: %c\n", flags.format);
 }
 
-static int		ft_get_var(const char *format, int len, va_list ap)
+static char		*ft_join_buff(char **s, char **buff, const char **format, int *i)
 {
-	int 	i;
+	char *tmp;
+	char *res;
+
+	if (!(tmp = ft_strndup(*format, *i)))
+		return (NULL);
+	if (*s)
+	{
+		if (*buff)
+		{
+			if (!(res = ft_strjoin(*s, *buff)))
+				return (NULL);
+		}
+		else
+			if (!(res = ft_strjoin(*s, tmp)))
+				return (NULL);
+		ft_strdel(s);
+	}
+	else
+	{
+		if (*buff)
+		{
+			if (!(res = ft_strjoin(tmp, *buff)))
+				return (NULL);
+		}
+		else
+			res = tmp;
+	}
+	if (res != tmp)
+		ft_strdel(&tmp);
+	ft_strdel(buff);
+	*buff = NULL;
+	*format = *format + *i;
+	*i = 0;
+	return (res);
+}
+
+static char		*ft_get_var(const char *format, int *i, va_list ap)
+{
+	int 	len;
+	char	*var;
+	char	*buff;
+	char	*tmp;
 	t_flags flags;
 
+	if (!(tmp = ft_strndup(format, *i)))
+		return (NULL);	
 	flags = reset_flags(flags);
-	format = format + len;
-	if ((i = ft_format_parser(&flags, format)) == -1)
-		return (-1);
+	format = format + *i;
+	if ((len = ft_format_parser(&flags, format)) == -1)
+		return (NULL);
+	if (!(var = ft_apply_flags(flags, ap)))
+		return (NULL);
+	if (!(buff = ft_strjoin(tmp, var)))
+		return (NULL);
+	ft_strdel(&tmp);
+	ft_strdel(&var);
 	print_flags(flags);
-	return (len + i);
+	*i += len;
+	return (buff);
 }
 
 int				ft_printf(const char *format, ...)
 {
 	int		i;
 	int		len;
-	int 	ret;
+	char	*s;
+	char	*buff;
 	va_list	ap;
 
 	i = 0;
 	len = 0;
-	ret = 0;
+	buff = NULL;
 	va_start(ap, format);
 	while (format[i])
 	{
 		while (format[i] != '%' && format[i]) 
 			i++;
-		write(1, format, i);
 		if (format[i] == '%')
 		{
-			if ((ret = ft_get_var(format, i, ap)) == -1)
+			if (!(buff = ft_get_var(format, &i, ap)))
 				return (-1);
 		}
-		printf("%d\n", ret);
-		format = format + ret;
-		i = 0;
+		if (!(s = ft_join_buff(&s, &buff, &format, &i)))
+			return (-1);
 	}
+	len = ft_strlen(s);
 	return (len);
 }

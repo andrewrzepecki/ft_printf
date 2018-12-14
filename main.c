@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:58:59 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/13 16:06:59 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/13 18:11:46 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int		main(void)
 {
-	ft_printf("%#ld");
+	ft_printf("%####000#lldasddsa%%dsfdsf%lld");
 	return (0);
 }

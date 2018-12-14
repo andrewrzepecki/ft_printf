@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/13 16:06:03 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/14 14:38:31 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ int				get_attribute_flag(t_flags *flags, char const *format, int *i)
 	if (!(attrib = ft_strndup(&format[*i], 1)))
 		return (-1);
 	if (!flags->attributes)
+	{
 		flags->attributes = attrib;
+		attrib = NULL;
+	}
 	else
 	{
-		tmp = flags->attributes;
-		if (!(flags->attributes = ft_strjoin(tmp, attrib)))
+		if (!(tmp = ft_strjoin(flags->attributes, attrib)))
 			return (-1);
-	//	free(tmp);
+		ft_strdel(&flags->attributes);
+		flags->attributes = tmp;
 	}
-	//ft_strdel(&attrib);
+	ft_strdel(&attrib);
 	return (0);
 }
 

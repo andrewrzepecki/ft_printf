@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 12:41:48 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/13 16:13:02 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/14 22:09:04 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct	s_get_format
 	char		*format;
 	int			(*f)(t_flags *, const char *, int *);
 }				t_get_format;
+
+typedef struct	s_var
+{
+	char 		*format;
+	char		*(*f)(va_list, t_var);
+}				t_var;
 
 int				get_attribute_flag(t_flags *flags, char const *format, int *i);
 int				get_modifier_flag(t_flags *flags, char const *format, int *i);
