@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/14 18:15:43 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/15 18:39:34 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char		*ft_get_var(const char *format, int *i, va_list ap)
 	format = format + *i;
 	if ((len = ft_format_parser(&flags, format)) == -1)
 		return (NULL);
-	if (!(var = ft_apply_flags(flags, ap)))
+	if (!(var = ft_apply_flags(ap, flags)))
 		return (NULL);
 	if (!(buff = ft_strjoin(tmp, var)))
 		return (NULL);

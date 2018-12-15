@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_precision.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/13 14:58:59 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/15 18:26:02 by anrzepec         ###   ########.fr       */
+/*   Created: 2018/12/15 17:33:39 by anrzepec          #+#    #+#             */
+/*   Updated: 2018/12/15 18:25:44 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		main(void)
+int			ft_apply_precision(char **s, t_flags flags)
 {
-	ft_printf("%####000#lldasddsa%%dsfdsf%lld");
-	return (0);
+	char *tmp;
+
+	if (flags.precision == -1)
+		return (1);
+	if (flags.format == 's' && ft_strlen(s) > flags.precision)
+	{
+		tmp = *s;
+		if (!(*s = ft_strsub(*s, 0, flags.precision)))
+			return (0);
+		ft_strdel(&tmp);
+	}
+	else if (ft_strchr("diouxX", flags.format))
+	{
+		
+	}
+	return (1);
 }

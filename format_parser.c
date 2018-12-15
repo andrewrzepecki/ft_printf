@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/14 14:38:31 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/15 18:37:45 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,13 @@ int				get_width_flag(t_flags *flags, char const *format, int *i)
 
 int				ft_format_parser(t_flags *flags, const char *format)
 {
-	int i;
-	int j;
+	int				i;
+	int				j;
+//	t_get_format	*g_format_tab;
 
 	i = 1;
+	//if (!(g_format_tab = set_flag_tab()))
+	//	return (-1);
 	while (ft_strchr("#+-0 .0123456789hlL", format[i]) && format[i])
 	{
 		j = -1;
