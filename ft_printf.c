@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/15 18:39:34 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/17 18:03:39 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,16 @@ static char		*ft_join_buff(char **s, char **buff, const char **format, int *i)
 	if (!(tmp = ft_strndup(*format, *i)))
 		return (NULL);
 	if (*s)
-	{
-		if (*buff)
-		{
-			if (!(res = ft_strjoin(*s, *buff)))
-				return (NULL);
-		}
-		else
-			if (!(res = ft_strjoin(*s, tmp)))
-				return (NULL);
-		ft_strdel(s);
-	}
+        res = (*buff) ? ft_strjoin(*s, *buff) : ft_strjoin(*s, tmp);
 	else
-	{
-		if (*buff)
-		{
-			if (!(res = ft_strjoin(tmp, *buff)))
-				return (NULL);
-		}
-		else
-			res = tmp;
-	}
+        res = (*buff) ? ft_strdup(*buff) : tmp;
+    if (!res)
+	    return (NULL);
 	if (res != tmp)
 		ft_strdel(&tmp);
-	ft_strdel(buff);
+	ft_varchar_free(2, buff, s);
 	*buff = NULL;
-	*format = *format + *i;
-	*i = 0;
+    *format = *format + *i;
 	return (res);
 }
 
@@ -76,11 +59,10 @@ static char		*ft_get_var(const char *format, int *i, va_list ap)
 		return (NULL);
 	if (!(var = ft_apply_flags(ap, flags)))
 		return (NULL);
-	if (!(buff = ft_strjoin(tmp, var)))
+    if (!(buff = ft_strjoin(tmp, var)))
 		return (NULL);
-	ft_strdel(&tmp);
-	ft_strdel(&var);
-	print_flags(flags);
+	ft_varchar_free(2, &tmp, &var);
+//    print_flags(flags);
 	*i += len;
 	return (buff);
 }
@@ -88,27 +70,25 @@ static char		*ft_get_var(const char *format, int *i, va_list ap)
 int				ft_printf(const char *format, ...)
 {
 	int		i;
-	int		len;
 	char	*s;
 	char	*buff;
 	va_list	ap;
 
-	i = 0;
-	len = 0;
-	buff = NULL;
+	buff = 0;
+    s = 0;
 	va_start(ap, format);
-	while (format[i])
+	while (format[(i = 0)])
 	{
 		while (format[i] != '%' && format[i]) 
 			i++;
 		if (format[i] == '%')
-		{
 			if (!(buff = ft_get_var(format, &i, ap)))
 				return (-1);
-		}
 		if (!(s = ft_join_buff(&s, &buff, &format, &i)))
 			return (-1);
 	}
-	len = ft_strlen(s);
-	return (len);
+    write(1, s, (i = ft_strlen(s)));
+    ft_varchar_free(2, &buff, &s);
+    va_end(ap);
+	return (i);
 }

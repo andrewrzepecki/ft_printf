@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:16:01 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/15 17:58:02 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:32:12 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ t_var			*set_struct_tab(void)
 	if (!(tab[3].format = ft_strdup("f")))
 		return (NULL);
 	tab[3].f = &ft_float_var;
-//	if (!(tab[4].format = ft_strdup("")))
-//		return (NULL);
-//	tab[4].f = function_name;
 	return (tab);
 }
 
@@ -65,4 +62,20 @@ t_flags			reset_flags(t_flags flags)
 	flags.modifier = NULL;
 	flags.format = 0;
 	return (flags);
+}
+
+void            ft_varchar_free(int nb, ...)
+{
+    va_list ap;
+    char    **tmp;
+    int     i;
+
+    i = -1;
+    va_start(ap, nb);
+    while (++i < nb)
+    {
+        tmp = va_arg(ap, char **);
+        ft_strdel(tmp);
+    }
+    va_end(ap);
 }

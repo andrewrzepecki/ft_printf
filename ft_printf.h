@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 12:41:48 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/15 18:41:45 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/16 22:41:59 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,16 @@ int				ft_printf(const char *format, ...);
 int				ft_get_flags(const char *format, t_flags flags);
 int				ft_format_parser(t_flags *flags, const char *format);
 char			*ft_apply_flags(va_list ap, t_flags flags);
+long long       ft_apply_modifier(va_list ap, t_flags flags);
+int             ft_apply_precision(char **s, t_flags flags);
+int             ft_apply_attrib(char **s, t_flags flags);
+int             ft_apply_width(char **s, t_flags flags);
 
 char			*ft_itoa_base(int nb, char *base);
 
+void            ft_varchar_free(int nb, ...);
 t_flags			reset_flags(t_flags flags);
+t_var           *set_struct_tab(void);
+t_get_format    *set_flag_tab(void);
+
 #endif

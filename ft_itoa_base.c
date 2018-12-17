@@ -6,11 +6,11 @@
 /*   By: andrewrzepecki <anrzepec@student.42.f      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 23:53:54 by andrewrze         #+#    #+#             */
-/*   Updated: 2018/12/15 17:21:32 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/16 11:24:35 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/libft.h"
 
 static int		get_base(char *base)
 {
