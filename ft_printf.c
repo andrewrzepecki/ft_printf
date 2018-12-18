@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/17 18:03:39 by andrewrze        ###   ########.fr       */
+/*   Updated: 2018/12/18 01:19:00 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static char		*ft_get_var(const char *format, int *i, va_list ap)
 		return (NULL);
     if (!(buff = ft_strjoin(tmp, var)))
 		return (NULL);
-	ft_varchar_free(2, &tmp, &var);
-//    print_flags(flags);
+//	ft_varchar_free(2, &tmp, &var);
+    print_flags(flags);
 	*i += len;
 	return (buff);
 }

@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/17 18:06:42 by andrewrze        ###   ########.fr       */
+/*   Updated: 2018/12/17 22:59:45 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				get_modifier_flag(t_flags *flags, char const *format, int *i)
 	{
 		if (!(flags->modifier = ft_strsub(format, *i, 2)))
 			return (-1);
-		(*i++);
+		(*i)++;
 	}
 	else
 	{
@@ -56,7 +56,7 @@ int				get_modifier_flag(t_flags *flags, char const *format, int *i)
 
 int				get_precision_flag(t_flags *flags, char const *format, int *i)
 {
-	(*i++);
+	(*i)++;
 	flags->precision = ft_atoi(&format[*i]);
 	while (format[*i] >= '0' && format[*i] <= '9')
 		(*i)++;
