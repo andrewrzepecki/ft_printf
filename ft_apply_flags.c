@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/17 18:08:51 by andrewrze        ###   ########.fr       */
+/*   Updated: 2018/12/18 11:49:58 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ char 		*ft_numeric_var(va_list ap, t_flags flags)
 	{
 		if (!(ld = ft_apply_modifier(ap, flags)))
 			return (NULL);
-		if (!(s = ft_itoa_base((int)ld, "0123456789")))
+		if (!(s = ft_itoa_base(ld, "0123456789")))
 			return (NULL);
 	}
 	else
 	{
-		if (!(ud = ft_apply_modifier(ap, flags)))
+		if (!(ud = ft_apply_umodifier(ap, flags)))
 			return (NULL);
-	//	if (!(s = ft_unsigned_value(ud, flags)))
-	//		return (NULL);
+		if (!(s = ft_unsigned_value(ud, flags)))
+			return (NULL);
 	}
 	if (!(ft_apply_precision(&s, flags)))
 		return (NULL);

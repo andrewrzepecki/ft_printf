@@ -6,13 +6,13 @@
 /*   By: andrewrzepecki <anrzepec@student.42.f      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 23:53:54 by andrewrze         #+#    #+#             */
-/*   Updated: 2018/12/18 11:48:51 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/18 11:32:17 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
-static int		get_base(char *base)
+static int		unsigned_get_base(char *base)
 {
 	char	*buff;
 	int		i;
@@ -31,7 +31,7 @@ static int		get_base(char *base)
 	return (i);
 }
 
-static int		get_int_divlen(long long nb, int div)
+static int		unsigned_get_int_divlen(unsigned long long nb, int div)
 {
 	int	len;
 
@@ -44,7 +44,7 @@ static int		get_int_divlen(long long nb, int div)
 	return (len);
 }
 
-char			*ft_itoa_base(long long nb, char *base)
+char			*ft_uitoa_base(unsigned long long nb, char *base)
 {
 	int		i;
 	int		c;
@@ -53,9 +53,9 @@ char			*ft_itoa_base(long long nb, char *base)
 
 	if (base)
 	{
-		if (!(res = get_base(base)))
+		if (!(res = unsigned_get_base(base)))
 			return (NULL);
-		i = get_int_divlen(nb, res);
+		i = unsigned_get_int_divlen(nb, res);
 		if (!(toa = (char*)malloc(sizeof(char) * (i + 1))))
 			return (NULL);
 		c = 0;

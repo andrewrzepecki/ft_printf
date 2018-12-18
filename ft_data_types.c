@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:16:01 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/17 17:32:12 by andrewrze        ###   ########.fr       */
+/*   Updated: 2018/12/18 11:40:01 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,21 @@ void            ft_varchar_free(int nb, ...)
         ft_strdel(tmp);
     }
     va_end(ap);
+}
+
+char			*ft_unsigned_value(unsigned long long d, t_flags flags)
+{
+	char	*s;
+
+	if (flags.format == 'x' || flags.format == 'X' || flags.format == 'p')
+		s = flags.format == 'x' ? ft_uitoa_base(d, "0123456789abcdef") : ft_uitoa_base(d, "0123456789ABCDEF");
+	else if (flags.format == 'o')
+		s = ft_uitoa_base(d, "01234578");
+	else
+		s = ft_uitoa_base(d, "0123456789");
+	if (!s)
+		return (NULL);
+	else
+		return (s);
+
 }
