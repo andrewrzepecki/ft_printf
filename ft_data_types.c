@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:16:01 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/18 11:40:01 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/18 14:42:01 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,17 @@ void            ft_varchar_free(int nb, ...)
 
 char			*ft_unsigned_value(unsigned long long d, t_flags flags)
 {
+	char	*tmp;
 	char	*s;
 
 	if (flags.format == 'x' || flags.format == 'X' || flags.format == 'p')
-		s = flags.format == 'x' ? ft_uitoa_base(d, "0123456789abcdef") : ft_uitoa_base(d, "0123456789ABCDEF");
+		s = flags.format == 'X' ? ft_uitoa_base(d, "0123456789ABCDEF") : ft_uitoa_base(d, "0123456789abcdef");
 	else if (flags.format == 'o')
-		s = ft_uitoa_base(d, "01234578");
+		s = ft_uitoa_base(d, "01234567");
 	else
-		s = ft_uitoa_base(d, "0123456789");
+		s = flags.format == 'b' ? ft_uitoa_base(d, "01") : ft_uitoa_base(d, "0123456789");
 	if (!s)
 		return (NULL);
 	else
 		return (s);
-
 }
