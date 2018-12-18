@@ -6,38 +6,49 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/18 16:03:44 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/18 19:22:57 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_apply_attrib(int len, char **s, t_flags flags)
+int		ft_apply_width(char **s, t_flags flags)
 {
-	if ()
+
 	return (1);
 }
 
-int		ft_apply_width(char **s, t_flags flags)
+int		ft_space_attrib(char **s)
 {
-	int		len;
-	char 	*tmp;
+	return (1);
+}
 
-	tmp = *s;
-	if (flags.format == 'p')
+int		ft_plus_attrib(char **s)
+{
+	return (1);
+}
+
+int		ft_hash_attrib(char **s, t_flags flags)
+{
+	return (1);
+}
+
+int		ft_apply_attrib(char **s, t_flags flags)
+{
+	if (ft_strchr(flags.attributes, '#') || flags.format == 'p')
+		if (!ft_hash_attrib(s, flags))
+			return (0);
+	if (ft_strchr(flags.attributes, '+'))
 	{
-		if (!(*s = ft_strjoin("0x", *s)))
+		if (!ft_plus_attrib(s))
 			return (0);
-		ft_strdel(&tmp);
-		tmp = *s;
 	}
+	else if (ft_strchr(flags.attributes, ' '))
+		if (!ft_space_attrib(s))
+			return (0);
 	if ((len = flags.width - ft_strlen(*s)) > 0)
-		if (!ft_apply_attrib(len, s, flags))
-			return (0);
-	else
-		if (!ft_apply_attrib(0, s, flags))
-			return (0);
-	if (tmp != *s)
-		ft_strdel(&tmp);
+		if (ft_strchr(flags.attributes, '0') || ft_strchr(flags.attributes, '-'))
+			if (!ft_apply_width(s, flags))
+				return (0);
 	return (1);
 }
