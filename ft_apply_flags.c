@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/18 19:23:08 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/18 23:42:01 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char 		*ft_apply_flags(va_list ap, t_flags flags)
 	}
 	else if (!(str = ft_char_var(ap, flags)))
 		return (NULL);
-//	if (!(ft_apply_width(&str, flags)))
+//	if (!(ft_apply_attrib(&str, flags)))
 //		return (NULL);
 	return (str);
 }
