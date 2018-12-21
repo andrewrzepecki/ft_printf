@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:06:07 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/11/07 17:11:56 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/19 17:09:53 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(const char *str, int c)
 {
 	unsigned int len;
 
+    if (!str)
+        return (NULL);
 	len = 0;
 	while (str[len])
 	{
