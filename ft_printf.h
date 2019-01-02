@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 12:41:48 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/19 10:58:44 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/02 16:28:08 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,9 @@ int             	ft_apply_precision(char **s, t_flags flags);
 int             	ft_apply_attrib(char **s, t_flags flags);
 int             	ft_apply_width(char **s, t_flags flags, int len);
 
-char				*ft_itoa_base(long long nb, char *base);
-char				*ft_uitoa_base(unsigned long long nb, char *base);
-
 char				*ft_unsigned_value(unsigned long long d, t_flags flags);
 void            	ft_varchar_free(int nb, ...);
-t_flags				reset_flags(t_flags flags);
+t_flags				reset_flags(void);
 t_var           	*set_struct_tab(void);
 t_get_format    	*set_flag_tab(void);
 

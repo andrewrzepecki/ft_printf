@@ -6,21 +6,11 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/18 19:23:10 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/23 18:41:04 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-
-void			print_flags(t_flags flags)
-{
-	printf("attribs: %s\n", flags.attributes);
-	printf("width: %d\n", flags.width);
-	printf("precision: %d\n", flags.precision);
-	printf("modifier: %s\n", flags.modifier);
-	printf("format: %c\n", flags.format);
-}
 
 static char		*ft_join_buff(char **s, char **buff, const char **format, int *i)
 {
@@ -53,7 +43,7 @@ static char		*ft_get_var(const char *format, int *i, va_list ap)
 
 	if (!(tmp = ft_strndup(format, *i)))
 		return (NULL);	
-	flags = reset_flags(flags);
+	flags = reset_flags();
 	format = format + *i;
 	if ((len = ft_format_parser(&flags, format)) == -1)
 		return (NULL);
@@ -62,7 +52,6 @@ static char		*ft_get_var(const char *format, int *i, va_list ap)
     if (!(buff = ft_strjoin(tmp, var)))
 		return (NULL);
 //	ft_varchar_free(2, &tmp, &var);
-//    print_flags(flags);
 	*i += len;
 	return (buff);
 }

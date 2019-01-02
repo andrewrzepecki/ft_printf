@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/21 03:16:15 by andrewrze        ###   ########.fr       */
+/*   Updated: 2018/12/23 17:53:29 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int		ft_apply_width(char **s, t_flags flags, int len)
         if (!(*s = ft_strjoin(*s, prefix)))
             return (1);
     }
-    else if ((ft_strchr("diouxXpbsc", flags.format) && (ft_strchr(flags.attributes, '#')
-                    || s[0][0] == '-')) || flags.format == 'p')
+    else if (ft_strchr(flags.attributes, '0') && ((ft_strchr(flags.attributes, '#')
+            && ft_strchr("oxXb", flags.format)) || flags.format == 'p'
+                || (s[0][0] == '-' && ft_strchr("di", flags.format))))
     {
         if (!(*s = ft_move_prefix(*s, prefix, flags)))
             return (0);
@@ -58,7 +59,7 @@ int		ft_apply_width(char **s, t_flags flags, int len)
     else
         if (!(*s = ft_strjoin(prefix, *s)))
             return (0);
-    //ft_strdel(&tmp);
+    ft_strdel(&tmp);
     return (1);
 }
 
@@ -81,7 +82,7 @@ int		ft_hash_attrib(char **s, t_flags flags)
 {
     char *tmp;
 
-    if (!ft_strchr("pxXbo", flags.format))
+    if (!(ft_strchr("pxXbo", flags.format)))
         return (1);
     tmp = *s;
     if (ft_strchr("xXp", flags.format))

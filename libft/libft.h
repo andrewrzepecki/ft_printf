@@ -6,7 +6,7 @@
 /*   By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/11/24 01:08:14 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/02 15:28:56 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+void                ft_strrev(char *str);
 
 void				*ft_memchr(void const *s, int c, size_t n);
 
@@ -130,6 +132,10 @@ void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
 char				*ft_itoa(int n);
+
+char                *ft_itoa_base(long long nb, char *base);
+
+char                *ft_uitoa_base(unsigned long long nb, char *base);
 
 char				**ft_strsplit(char const *s, char c);
 

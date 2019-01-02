@@ -6,7 +6,7 @@
 /*   By: andrewrzepecki <anrzepec@student.42.f      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 14:38:54 by andrewrze         #+#    #+#             */
-/*   Updated: 2018/12/18 14:14:46 by anrzepec         ###   ########.fr       */
+/*   Updated: 2018/12/23 18:45:48 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ unsigned long long	ft_apply_umodifier(va_list ap, t_flags flags)
 {
 	 unsigned long long d;
 
+    d = 0;
     if (!flags.modifier)
-        d = (unsigned int)va_arg(ap, unsigned long long int);
+        d = (unsigned int)va_arg(ap, unsigned int);
     else if (ft_strlen(flags.modifier) == 2)
     {
         if (flags.modifier[0] == 'l')
@@ -39,6 +40,7 @@ long long       	ft_apply_modifier(va_list ap, t_flags flags)
 {
     long long d;
 
+    d = 0;
     if (!flags.modifier)
         d = va_arg(ap, int);
     else if (ft_strlen(flags.modifier) == 2)

@@ -6,13 +6,16 @@
 #    By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/17 19:12:20 by anrzepec          #+#    #+#              #
-#    Updated: 2018/11/24 02:20:17 by anrzepec         ###   ########.fr        #
+#    Updated: 2019/01/02 15:29:46 by andrewrze        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= 	libft.a
 
-SRC 	= char_count.c \
+SRC 	= ft_uitoa_base.c \
+		  ft_itoa_base.c \
+		  ft_strrev.c \
+		  char_count.c \
 		  get_next_line.c \
 		  ft_atoi.c \
 		  ft_bzero.c \
