@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 15:06:07 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/28 15:57:04 by andrewrze        ###   ########.fr       */
+/*   Created: 2019/01/03 12:25:25 by anrzepec          #+#    #+#             */
+/*   Updated: 2019/01/03 12:25:37 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 char	*ft_strchr(const char *str, int c)
 {
-	unsigned int len;
+	unsigned int	len;
 
 	len = 0;
-    if (!str)
-        return (NULL);
+	if (!str)
+		return (NULL);
 	while (str[len])
 	{
 		if (str[len] == (char)c)

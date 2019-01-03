@@ -6,11 +6,11 @@
 #    By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/17 19:12:20 by anrzepec          #+#    #+#              #
-#    Updated: 2019/01/02 16:27:48 by andrewrze        ###   ########.fr        #
+#    Updated: 2019/01/02 18:44:38 by andrewrze        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= 	printflibft.a
+NAME 	= 	libftprintf.a
 
 SRC 	= 	ft_printf.c \
 			format_parser.c \

@@ -6,7 +6,7 @@
 /*   By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/02 15:28:56 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/03 12:28:41 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-void                ft_strrev(char *str);
+void				ft_strrev(char *str);
 
 void				*ft_memchr(void const *s, int c, size_t n);
 
@@ -133,9 +133,9 @@ void				ft_putnbr_fd(int n, int fd);
 
 char				*ft_itoa(int n);
 
-char                *ft_itoa_base(long long nb, char *base);
+char				*ft_itoa_base(long long nb, char *base);
 
-char                *ft_uitoa_base(unsigned long long nb, char *base);
+char				*ft_uitoa_base(unsigned long long nb, char *base);
 
 char				**ft_strsplit(char const *s, char c);
 
@@ -161,6 +161,6 @@ int					ft_strupper(char const *s);
 
 int					ft_strlower(char const *s);
 
-int                 char_count(char *s, char c);
+int					char_count(char *s, char c);
 
 #endif
