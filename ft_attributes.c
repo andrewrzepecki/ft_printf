@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/23 17:53:29 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/03 15:23:06 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		ft_apply_width(char **s, t_flags flags, int len)
     else
         if (!(*s = ft_strjoin(prefix, *s)))
             return (0);
-    ft_strdel(&tmp);
+    //ft_strdel(&tmp);
     return (1);
 }
 

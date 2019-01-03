@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/02 20:59:19 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/03 18:07:03 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char 		*ft_apply_flags(va_list ap, t_flags flags)
 
 	if (!(tab = set_struct_tab()))
 		return (NULL);
-	if (ft_strchr("diouxXpbscf", flags.format))
+	if (ft_strchr("dioUuxXpbscf", flags.format))
 	{
 		i = -1;
 		while (++i < 4)

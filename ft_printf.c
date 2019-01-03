@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/23 18:41:04 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/03 17:49:20 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int				ft_printf(const char *format, ...)
 	char	*buff;
 	va_list	ap;
 
-	buff = 0;
-    s = 0;
+	buff = NULL;
+    s = NULL;
 	va_start(ap, format);
 	while (format[(i = 0)])
 	{

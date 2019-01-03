@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 12:25:58 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/03 12:26:41 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/03 16:57:32 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,22 @@ static int		get_int_divlen(long long nb, int div)
 		nb = nb / div;
 		len++;
 	}
-	return (len);
+	return ((len = len == 0 ? 1 : len));
+}
+
+int				add_negative_sign(char **s, int neg)
+{
+	char *tmp;
+
+	tmp = NULL;
+	if (neg)
+	{
+		if (!(tmp = ft_strjoin("-", *s)))
+			return (0);
+		ft_strdel(s);
+		*s = tmp;
+	}
+	return (1);
 }
 
 char			*ft_itoa_base(long long nb, char *base)
@@ -49,6 +64,7 @@ char			*ft_itoa_base(long long nb, char *base)
 	int		i;
 	int		c;
 	int		res;
+	int		neg;
 	char	*toa;
 
 	if (!base)
@@ -59,12 +75,18 @@ char			*ft_itoa_base(long long nb, char *base)
 	if (!(toa = (char*)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	c = 0;
+	if (nb == 0)
+		toa[0] = base[0];
+	neg = nb < 0 ? 1 : 0;
+	nb = neg ? nb * -1 : nb;
 	while (nb)
 	{
-		toa[i - c - 1] = base[nb % res];
+		toa[i - c - 1] = base[(unsigned int)nb % res];
 		nb = nb / res;
 		c++;
 	}
 	toa[i] = '\0';
+	if (!add_negative_sign(&toa, neg))
+		return (NULL);
 	return (toa);
 }

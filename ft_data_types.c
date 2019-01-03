@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:16:01 by anrzepec          #+#    #+#             */
-/*   Updated: 2018/12/23 18:44:52 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/03 15:34:24 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_var			*set_struct_tab(void)
 
     if (!(tab = (t_var*)malloc(sizeof(t_var) * 4)))
         return (NULL);
-    if (!(tab[0].format = ft_strdup("diouxXpb")))
+    if (!(tab[0].format = ft_strdup("diouUxXpb")))
         return (NULL);
     tab[0].f = &ft_numeric_var;
     if (!(tab[1].format = ft_strdup("s")))

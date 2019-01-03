@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 12:24:14 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/03 12:25:02 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/03 17:31:43 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int		unsigned_get_int_divlen(unsigned long long nb, int div)
 		nb = nb / div;
 		len++;
 	}
-	return (len);
+	return ((len = len == 0 ? 1 : len));
 }
 
 char			*ft_uitoa_base(unsigned long long nb, char *base)
@@ -59,6 +59,8 @@ char			*ft_uitoa_base(unsigned long long nb, char *base)
 	if (!(toa = (char*)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	c = 0;
+	if (nb == 0)
+		toa[0] = base[0];
 	while (nb)
 	{
 		toa[i - c - 1] = base[nb % res];

@@ -6,7 +6,7 @@
 /*   By: andrewrzepecki <anrzepec@student.42.f      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 19:20:33 by andrewrze         #+#    #+#             */
-/*   Updated: 2019/01/02 21:13:17 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/03 15:16:15 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int         main(void)
 {
-    // Mandatory Complete, floats, doubles and NaN to handle, norme to handle && 
-    // reorganisation of compiler     
+    // Mandatory Complete, floats, doubles and NaN to handle, norme to handle 
     int *ptr;
     int nbr;
 
-    printf("%#- 0000017X\n", -42);
-    ft_printf("%#- 0000017X\n", -42);
+    printf("%10s is a string\n", "this");
+    ft_printf("%10s is a string\n", "this");
 
-    printf(" tere %#X\n", 4); 
-    ft_printf(" here %#X\n", 4);
+    printf(" tere %#ztjttx\n", 1); 
+    ft_printf(" here %#ztjttx\n", 1);
+
 
     ft_printf("My ret: {{%d}}\n", ft_printf("Insert var here: %042.3s and %15.3s\n", "abcdef", "12345"));
     printf("Sys ret: {{%d}}\n", printf("Insert var here: %042.3s and %15.3s\n", "abcdef", "12345"));
