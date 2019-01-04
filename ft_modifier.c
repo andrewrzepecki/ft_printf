@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 17:43:03 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/03 18:02:19 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/04 17:48:16 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ unsigned long long	ft_apply_umodifier(va_list ap, t_flags flags)
 	 unsigned long long int d;
 
     d = 0;
-	if (!flags.modifier)
+	if (!flags.modifier && !ft_strchr("Uu", flags.format))
 		d = va_arg(ap, unsigned int);
+	else if (ft_strchr("Uu", flags.format))
+		d = va_arg(ap, unsigned long long int);
 	else if (ft_strlen(flags.modifier) == 2)
     {
         if (flags.modifier[0] == 'l')
