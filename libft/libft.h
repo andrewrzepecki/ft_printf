@@ -6,7 +6,7 @@
 /*   By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/03 12:28:41 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/06 13:13:09 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void				ft_putnbr_fd(int n, int fd);
 
 char				*ft_itoa(int n);
 
-char				*ft_itoa_base(long long nb, char *base);
+char				*ft_itoa_base(long long int nb, char *base);
 
 char				*ft_uitoa_base(unsigned long long nb, char *base);
 

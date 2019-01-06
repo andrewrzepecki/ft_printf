@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/03 18:07:03 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/06 13:30:36 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char 		*ft_numeric_var(va_list ap, t_flags flags)
 {
 	char					*s;
 	unsigned long long int	ud;
-	long long int			ld;
+	long long int	        ld;
 
 	if (flags.format == 'd' || flags.format == 'i')
 	{

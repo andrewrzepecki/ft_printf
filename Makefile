@@ -6,7 +6,7 @@
 #    By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/17 19:12:20 by anrzepec          #+#    #+#              #
-#    Updated: 2019/01/02 18:44:38 by andrewrze        ###   ########.fr        #
+#    Updated: 2019/01/05 20:44:35 by andrewrze        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC 	= 	ft_printf.c \
 			ft_attributes.c \
 			ft_data_types.c \
 			ft_modifier.c \
-			ft_precision.c 
+			ft_precision.c \
+			debugtools/print_var.c
 
 OBJS	=	$(SRC:.c=.o)
 

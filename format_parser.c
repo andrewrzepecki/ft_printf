@@ -6,12 +6,11 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/04 17:48:15 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/06 16:16:39 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "get_format.h"
 
 int				get_attribute_flag(t_flags *flags, char const *format, int *i)
 {
@@ -77,11 +76,11 @@ int				ft_format_parser(t_flags *flags, const char *format)
 {
 	int				i;
 	int				j;
-//	t_get_format	*g_format_tab;
+	t_get_format	*g_format_tab;
 
 	i = 1;
-	//if (!(g_format_tab = set_flag_tab()))
-	//	return (-1);
+	if (!(g_format_tab = set_flag_tab()))
+	    return (-1);
 	while (ft_strchr("#+-0 .0123456789hlLtjz", format[i]) && format[i])
 	{
 		j = -1;
@@ -96,5 +95,6 @@ int				ft_format_parser(t_flags *flags, const char *format)
 	}
 	if (format[i])
 		flags->format = format[i++];
+    //ft_print_flags(*flags);
 	return (i);
 }

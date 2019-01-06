@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 17:43:03 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/04 17:48:16 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/06 13:15:56 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ unsigned long long	ft_apply_umodifier(va_list ap, t_flags flags)
 	 unsigned long long int d;
 
     d = 0;
-	if (!flags.modifier && !ft_strchr("Uu", flags.format))
+	if (!flags.modifier && flags.format != 'U')
 		d = va_arg(ap, unsigned int);
 	else if (ft_strchr("Uu", flags.format))
 		d = va_arg(ap, unsigned long long int);
-	else if (ft_strlen(flags.modifier) == 2)
+	else if (ft_strlen(flags.modifier) == 2 || ft_strchr(flags.modifier, 'j'))
     {
-        if (flags.modifier[0] == 'l')
+        if (flags.modifier[0] == 'l' || ft_strchr(flags.modifier, 'j'))
             d = va_arg(ap, unsigned long long int);
         else
             d = (unsigned char)va_arg(ap, unsigned long long int);
@@ -40,17 +40,17 @@ unsigned long long	ft_apply_umodifier(va_list ap, t_flags flags)
     return (d);	
 }
 
-long long       	ft_apply_modifier(va_list ap, t_flags flags)
+long long int      	ft_apply_modifier(va_list ap, t_flags flags)
 {
-    long long d;
+    long long int d;
 
     d = 0;
     if (!flags.modifier)
         d = va_arg(ap, int);
-    else if (ft_strlen(flags.modifier) == 2)
+    else if (ft_strlen(flags.modifier) == 2 || ft_strchr(flags.modifier, 'j'))
     {
-        if (flags.modifier[0] == 'l')
-            d = (long long)va_arg(ap, long long);
+        if (flags.modifier[0] == 'l' || ft_strchr(flags.modifier, 'j'))
+            d = va_arg(ap, long long int);
         else
             d = (char)va_arg(ap, int);
     }

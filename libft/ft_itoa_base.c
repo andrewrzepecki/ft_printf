@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 12:25:58 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/03 16:57:32 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/06 14:19:02 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		get_base(char *base)
 	return (i);
 }
 
-static int		get_int_divlen(long long nb, int div)
+static int		get_int_divlen(long long int nb, int div)
 {
 	int	len;
 
@@ -59,7 +59,7 @@ int				add_negative_sign(char **s, int neg)
 	return (1);
 }
 
-char			*ft_itoa_base(long long nb, char *base)
+char			*ft_itoa_base(long long int nb, char *base)
 {
 	int		i;
 	int		c;
@@ -77,11 +77,11 @@ char			*ft_itoa_base(long long nb, char *base)
 	c = 0;
 	if (nb == 0)
 		toa[0] = base[0];
-	neg = nb < 0 ? 1 : 0;
-	nb = neg ? nb * -1 : nb;
+    neg = nb < 0 ? 1 : 0;
+    nb = neg ? nb * -1 : nb;
 	while (nb)
 	{
-		toa[i - c - 1] = base[(unsigned int)nb % res];
+		toa[i - c - 1] = base[(unsigned long long int)nb % res];
 		nb = nb / res;
 		c++;
 	}

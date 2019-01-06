@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/04 17:00:47 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:59:41 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int		ft_apply_width(char **s, t_flags flags, int len)
     ft_memset(prefix, ' ', len);
     prefix[len] = '\0';
     tmp = *s;
-    if (ft_strchr(flags.attributes, '0') && !ft_strchr(flags.attributes, '-'))
+    if (ft_strchr(flags.attributes, '0') && !ft_strchr(flags.attributes, '-')
+            && !(ft_strchr("diouUxXbp", flags.format) && flags.precision < flags.width
+                && flags.precision != -1))
         ft_memset(prefix, '0', len); 
     if (ft_strchr(flags.attributes, '-'))
     {
@@ -51,7 +53,9 @@ int		ft_apply_width(char **s, t_flags flags, int len)
     }
     else if (ft_strchr(flags.attributes, '0') && ((ft_strchr(flags.attributes, '#')
             && ft_strchr("oxXb", flags.format)) || flags.format == 'p'
-                || (ft_strchr("+-", s[0][0]) && ft_strchr("di", flags.format))))
+                || (ft_strchr("+-", s[0][0]) && ft_strchr("di", flags.format)))
+            && !(ft_strchr("diouUxXbp", flags.format) && flags.precision < flags.width
+                && flags.precision != -1))
     {
         if (!(*s = ft_move_prefix(*s, prefix, flags)))
             return (0);
@@ -82,7 +86,8 @@ int		ft_hash_attrib(char **s, t_flags flags)
 {
     char *tmp;
 
-    if (!ft_strchr("pxXbo", flags.format) || !ft_strcmp(*s, "0"))
+    if (!ft_strchr("pxXbo", flags.format) || !ft_strcmp(*s, "0")
+            || (!ft_strlen(*s) && flags.format != 'o'))
         return (1);
     tmp = *s;
     if (ft_strchr("xXp", flags.format))

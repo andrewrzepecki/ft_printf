@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 12:41:48 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/02 16:28:08 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/06 13:17:01 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int					ft_get_flags(const char *format, t_flags flags);
 int					ft_format_parser(t_flags *flags, const char *format);
 char				*ft_apply_flags(va_list ap, t_flags flags);
 unsigned long long	ft_apply_umodifier(va_list ap, t_flags flags);
-long long       	ft_apply_modifier(va_list ap, t_flags flags);
+long long int       ft_apply_modifier(va_list ap, t_flags flags);
 int             	ft_apply_precision(char **s, t_flags flags);
 int             	ft_apply_attrib(char **s, t_flags flags);
 int             	ft_apply_width(char **s, t_flags flags, int len);
@@ -62,5 +62,12 @@ void            	ft_varchar_free(int nb, ...);
 t_flags				reset_flags(void);
 t_var           	*set_struct_tab(void);
 t_get_format    	*set_flag_tab(void);
+
+/*
+ * DEBUGGING FUNCTIONS
+ *
+*/
+
+void                ft_print_flags(t_flags flags);
 
 #endif
