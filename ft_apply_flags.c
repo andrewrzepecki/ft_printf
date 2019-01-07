@@ -6,38 +6,43 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/06 13:30:36 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/07 15:47:53 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_float_var(va_list ap, t_flags flags)
+char			*ft_float_var(va_list ap, t_flags flags)
 {
-	char *s;
-    s = NULL;
-    ap = NULL;
-    flags.format = 'c';
+	char	*s;
+
+	s = NULL;
+	ap = NULL;
+	flags.format = 'c';
 	return (s);
 }
 
-char		*ft_char_var(va_list ap, t_flags flags)
+char			*ft_char_var(va_list ap, t_flags flags, int *len)
 {
-	char *s;
-	
+	char	*s;
+
 	if (!(s = ft_memalloc(2)))
 		return (NULL);
-    if (flags.format == 'c')
-	    *s = va_arg(ap, int);
-    else
-        *s = flags.format;
+	if (flags.format == 'c')
+	{
+		*s = va_arg(ap, int);
+		if (s[0] == 0)
+			*len = 1;
+	}
+	else
+		*s = flags.format;
 	return (s);
 }
 
-char		*ft_str_var(va_list ap, t_flags flags)
+char			*ft_str_var(va_list ap, t_flags flags)
 {
-	char *s;
-	
+	char	*s;
+
 	if (!(s = (char*)va_arg(ap, char *)))
 		if (!(s = ft_strdup("(null)")))
 			return (NULL);
@@ -46,11 +51,11 @@ char		*ft_str_var(va_list ap, t_flags flags)
 	return (s);
 }
 
-char 		*ft_numeric_var(va_list ap, t_flags flags)
+char			*ft_numeric_var(va_list ap, t_flags flags)
 {
 	char					*s;
 	unsigned long long int	ud;
-	long long int	        ld;
+	long long int			ld;
 
 	if (flags.format == 'd' || flags.format == 'i')
 	{
@@ -69,25 +74,26 @@ char 		*ft_numeric_var(va_list ap, t_flags flags)
 	return (s);
 }
 
-char 		*ft_apply_flags(va_list ap, t_flags flags)
+char			*ft_apply_flags(va_list ap, t_flags flags, int *len)
 {
 	int		i;
-	char 	*str;
+	char	*s;
 	t_var	*tab;
 
 	if (!(tab = set_struct_tab()))
 		return (NULL);
-	if (ft_strchr("dioUuxXpbscf", flags.format))
+	if (ft_strchr("dioUuxXpbsf", flags.format))
 	{
 		i = -1;
-		while (++i < 4)
+		while (++i < 3)
 			if (ft_strchr(tab[i].format, flags.format))
-				if (!(str = tab[i].f(ap, flags)))
+				if (!(s = tab[i].f(ap, flags)))
 					return (NULL);
 	}
-	else if (!(str = ft_char_var(ap, flags)))
+	else if (!(s = ft_char_var(ap, flags, len)))
 		return (NULL);
-    if (!(ft_apply_attrib(&str, flags)))
+	if (!(ft_apply_attrib(&s, flags, len)))
 		return (NULL);
-	return (str);
+	*len += ft_strlen(s);
+	return (s);
 }

@@ -6,78 +6,49 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/04 17:48:15 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/07 15:44:33 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char		*ft_join_buff(char **s, char **buff, const char **format, int *i)
+static char		*ft_get_var(const char *format, va_list ap, int *len)
 {
-	char *tmp;
-	char *res;
-
-	if (!(tmp = ft_strndup(*format, *i)))
-		return (NULL);
-	if (*s)
-        res = (*buff) ? ft_strjoin(*s, *buff) : ft_strjoin(*s, tmp);
-	else
-        res = (*buff) ? ft_strdup(*buff) : tmp;
-    if (!res)
-	    return (NULL);
-	if (res != tmp)
-		ft_strdel(&tmp);
-	ft_varchar_free(2, buff, s);
-	*buff = NULL;
-    *format = *format + *i;
-	return (res);
-}
-
-static char		*ft_get_var(const char *format, int *i, va_list ap)
-{
-	int 	len;
 	char	*var;
-	char	*buff;
-	char	*tmp;
-	t_flags flags;
+	t_flags	flags;
 
-	if (!(tmp = ft_strndup(format, *i)))
-		return (NULL);	
 	flags = reset_flags();
-	format = format + *i;
-	if ((len = ft_format_parser(&flags, format)) == -1)
+	if ((len[0] = ft_format_parser(&flags, format)) == -1)
 		return (NULL);
-	if (!(var = ft_apply_flags(ap, flags)))
+	if (!(var = ft_apply_flags(ap, flags, &len[1])))
 		return (NULL);
-    if (!(buff = ft_strjoin(tmp, var)))
-		return (NULL);
-//	ft_varchar_free(2, &tmp, &var);
-	*i += len;
-	return (buff);
+	return (var);
 }
 
 int				ft_printf(const char *format, ...)
 {
 	int		i;
-	char	*s;
-	char	*buff;
+	int		len[2];
+	int		ret;
+	char	*var;
 	va_list	ap;
 
-	buff = NULL;
-    s = NULL;
+	ret = 0;
 	va_start(ap, format);
 	while (format[(i = 0)])
 	{
-		while (format[i] != '%' && format[i]) 
+		len[0] = 0;
+		len[1] = 0;
+		while (format[i] != '%' && format[i])
 			i++;
 		if (format[i] == '%')
-			if (!(buff = ft_get_var(format, &i, ap)))
+			if ((var = ft_get_var(format + i, ap, len)) < 0)
 				return (-1);
-		if (!(s = ft_join_buff(&s, &buff, &format, &i)))
-			return (-1);
+		write(1, format, i);
+		write(1, var, len[1]);
+		format = format + i + len[0];
+		ret += len[1] + i;
 	}
-    write(1, s, (i = ft_strlen(s)));
-    ft_varchar_free(2, &buff, &s);
-    va_end(ap);
-	return (i);
+	va_end(ap);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 15:56:45 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/06 16:15:54 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/07 15:36:11 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int		main(void)
 //	printf("\n%010.3s\n", "abcde");
 //	ft_printf("%010.3s\n", "abcde");
 
-    printf("%lld\n", 9223372036854775807);
-	ft_printf("%lld\n", 9223372036854775807);
+    printf("char: %c digit: %lld\n", 0, 9223372036854775807);
+	ft_printf("char: %c digit: %lld\n", 0, 9223372036854775807);
    
-    ft_printf("%#.o\n", 0);
-    printf("%#.o\n", 0);
+ //   ft_printf("%#.o\n", 0);
+  //  printf("%#.o\n", 0);
 
 	return (0);
 }
