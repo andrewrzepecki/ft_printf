@@ -6,13 +6,13 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 12:25:58 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/06 14:19:02 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/07 17:05:38 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		get_base(char *base)
+int		get_base(char *base)
 {
 	char	*buff;
 	int		i;
@@ -31,7 +31,7 @@ static int		get_base(char *base)
 	return (i);
 }
 
-static int		get_int_divlen(long long int nb, int div)
+int		get_int_divlen(unsigned long long int nb, int div)
 {
 	int	len;
 
@@ -44,7 +44,7 @@ static int		get_int_divlen(long long int nb, int div)
 	return ((len = len == 0 ? 1 : len));
 }
 
-int				add_negative_sign(char **s, int neg)
+int		add_negative_sign(char **s, int neg)
 {
 	char *tmp;
 
@@ -59,34 +59,48 @@ int				add_negative_sign(char **s, int neg)
 	return (1);
 }
 
-char			*ft_itoa_base(long long int nb, char *base)
+char	*ft_set_itoa(unsigned long long nb, char *base, int s_len, int n)
 {
-	int		i;
-	int		c;
+	char	*tmp;
 	int		res;
-	int		neg;
-	char	*toa;
+	char	*s;
+	int		i;
+
+	i = 0;
+	tmp = NULL;
+	if (!(res = get_base(base)))
+		return (NULL);
+	s_len = get_int_divlen(nb, res);
+	if (!(s = (char*)malloc(sizeof(char) * (s_len + 1))))
+		return (NULL);
+	if (!nb)
+		s[0] = base[0];
+	while (nb)
+	{
+		s[s_len - i - 1] = base[(unsigned long long int)nb % res];
+		nb = nb / res;
+		i++;
+	}
+	s[s_len] = '\0';
+	if (!add_negative_sign(&s, n))
+		return (NULL);
+	return (s);
+}
+
+char	*ft_itoa_base(long long int nb, char *base)
+{
+	int		len;
+	char	*s;
 
 	if (!base)
 		return (NULL);
-	if (!(res = get_base(base)))
-		return (NULL);
-	i = get_int_divlen(nb, res);
-	if (!(toa = (char*)malloc(sizeof(char) * (i + 1))))
-		return (NULL);
-	c = 0;
-	if (nb == 0)
-		toa[0] = base[0];
-    neg = nb < 0 ? 1 : 0;
-    nb = neg ? nb * -1 : nb;
-	while (nb)
+	len = 0;
+	if (nb >= 0)
 	{
-		toa[i - c - 1] = base[(unsigned long long int)nb % res];
-		nb = nb / res;
-		c++;
+		if (!(s = ft_set_itoa(nb, base, len, 0)))
+			return (NULL);
 	}
-	toa[i] = '\0';
-	if (!add_negative_sign(&toa, neg))
+	else if (!(s = ft_set_itoa(nb * -1, base, len, 1)))
 		return (NULL);
-	return (toa);
+	return (s);
 }

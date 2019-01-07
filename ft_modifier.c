@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 17:43:03 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/07 15:54:32 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/07 17:14:27 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ long long int			ft_apply_modifier(va_list ap, t_flags flags)
 	d = 0;
 	if (!flags.modifier)
 		d = va_arg(ap, int);
-	else if (ft_strlen(flags.modifier) == 2 || ft_strchr(flags.modifier, 'j'))
+	else if (ft_strlen(flags.modifier) == 2 || ft_strchr(flags.modifier, 'j')
+			|| ft_strchr(flags.modifier, 'z'))
 	{
-		if (flags.modifier[0] == 'l' || ft_strchr(flags.modifier, 'j'))
+		if (flags.modifier[0] == 'l' || ft_strchr(flags.modifier, 'j')
+				|| ft_strchr(flags.modifier, 'z'))
 			d = va_arg(ap, long long int);
 		else
 			d = (char)va_arg(ap, int);
