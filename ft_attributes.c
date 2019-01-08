@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/07 16:02:39 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/08 19:45:47 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ char			*ft_move_prefix(char *s, char *prefix, t_flags flags)
 	char	*tmp;
 	char	*str;
 
+	if (s == NULL)
+	{
+		if (!(s = (char*)ft_memalloc(2)))
+			return (NULL);
+		s[0] = '0';
+	}
 	tmp = ft_strchr("Xxbp", flags.format) ? ft_strsub(s, 2, ft_strlen(s) - 2)
 		: ft_strsub(s, 1, ft_strlen(s) - 1);
 	if (!tmp)
@@ -43,7 +49,7 @@ int				ft_apply_width(char **s, t_flags flags, int width)
 	prefix[width] = '\0';
 	tmp = *s;
 	if (ft_strchr(flags.attributes, '0') && !ft_strchr(flags.attributes, '-')
-			&& !(ft_strchr("diouUxXbp", flags.format) && flags.precision <\
+			&& !(ft_strchr("diOouUxXbp", flags.format) && flags.precision <\
 				flags.width && flags.precision != -1))
 		ft_memset(prefix, '0', width);
 	if (ft_strchr(flags.attributes, '-'))
@@ -52,9 +58,9 @@ int				ft_apply_width(char **s, t_flags flags, int width)
 			return (1);
 	}
 	else if (ft_strchr(flags.attributes, '0') && ((ft_strchr(flags.attributes, '#')
-					&& ft_strchr("oxXb", flags.format)) || flags.format == 'p'
-				|| (ft_strchr("+-", s[0][0]) && ft_strchr("di", flags.format)))
-			&& !(ft_strchr("diouUxXbp", flags.format) && flags.precision < flags.width
+					&& ft_strchr("OoxXb", flags.format)) || flags.format == 'p'
+				|| (ft_strchr("+- ", s[0][0]) && ft_strchr("Ddi", flags.format)))
+			&& !(ft_strchr("diOouUxXbp", flags.format) && flags.precision < flags.width
 				&& flags.precision != -1))
 	{
 		if (!(*s = ft_move_prefix(*s, prefix, flags)))
@@ -70,7 +76,7 @@ int				ft_sign_attrib(char **s, t_flags flags)
 {
 	char	*tmp;
 
-	if (ft_strchr("di", flags.format) && s[0][0] != '-')
+	if (ft_strchr("Ddi", flags.format) && s[0][0] != '-')
 	{
 		tmp = *s;
 		*s = ft_strchr(flags.attributes, '+') ? ft_strjoin("+", *s)
@@ -86,8 +92,8 @@ int				ft_hash_attrib(char **s, t_flags flags)
 {
 	char	*tmp;
 
-	if (!ft_strchr("pxXbo", flags.format) || !ft_strcmp(*s, "0")
-			|| (!ft_strlen(*s) && flags.format != 'o'))
+	if (!ft_strchr("pxXbOo", flags.format) || (!ft_strcmp(*s, "0") && flags.format != 'p')
+			|| (!ft_strlen(*s) && !ft_strchr("Oo", flags.format)))
 		return (1);
 	tmp = *s;
 	if (ft_strchr("xXp", flags.format))
@@ -106,7 +112,9 @@ int		ft_apply_attrib(char **s, t_flags flags, int *len)
 {
 	int	width;
 
-	if (ft_strchr(flags.attributes, '#') || flags.format == 'p')
+	if ((ft_strchr(flags.attributes, '#') || flags.format == 'p')
+			&& !(flags.format == 'o' && (int)ft_strlen(*s) == flags.precision 
+				&& s[0][0] == '0'))
 		if (!ft_hash_attrib(s, flags))
 			return (0);
 	if (ft_strchr(flags.attributes, '+') || ft_strchr(flags.attributes, ' '))

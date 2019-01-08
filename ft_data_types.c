@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:16:01 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/07 17:11:43 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/08 17:32:08 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_var				*set_struct_tab(void)
 
 	if (!(tab = (t_var*)malloc(sizeof(t_var) * 3)))
 		return (NULL);
-	if (!(tab[0].format = ft_strdup("diouUxXpb")))
+	if (!(tab[0].format = ft_strdup("DdiOouUxXpb")))
 		return (NULL);
 	tab[0].f = &ft_numeric_var;
 	if (!(tab[1].format = ft_strdup("s")))
@@ -86,7 +86,7 @@ char				*ft_unsigned_value(unsigned long long d, t_flags flags)
 	if (flags.format == 'x' || flags.format == 'X' || flags.format == 'p')
 		s = flags.format == 'X' ? ft_uitoa_base(d, "0123456789ABCDEF")
 			: ft_uitoa_base(d, "0123456789abcdef");
-	else if (flags.format == 'o')
+	else if (ft_strchr("Oo", flags.format))
 		s = ft_uitoa_base(d, "01234567");
 	else
 		s = flags.format == 'b' ? ft_uitoa_base(d, "01")

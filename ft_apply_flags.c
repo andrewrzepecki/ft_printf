@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/07 15:47:53 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/08 19:45:49 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			*ft_numeric_var(va_list ap, t_flags flags)
 	unsigned long long int	ud;
 	long long int			ld;
 
-	if (flags.format == 'd' || flags.format == 'i')
+	if (ft_strchr("Ddi", flags.format))
 	{
 		ld = ft_apply_modifier(ap, flags);
 		if (!(s = ft_itoa_base(ld, "0123456789")))
@@ -82,7 +82,7 @@ char			*ft_apply_flags(va_list ap, t_flags flags, int *len)
 
 	if (!(tab = set_struct_tab()))
 		return (NULL);
-	if (ft_strchr("dioUuxXpbsf", flags.format))
+	if (ft_strchr("DdiOoUuxXpbsf", flags.format))
 	{
 		i = -1;
 		while (++i < 3)
