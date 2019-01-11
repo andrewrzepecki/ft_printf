@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/09 17:45:45 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/11 01:02:14 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char			*ft_move_prefix(char *s, char *prefix, t_flags flags)
 	return (str);
 }
 
-int				ft_apply_width(char **s, t_flags flags, int width)
+int				ft_apply_width(char **s, t_flags flags, int width, int *len)
 {
 	char	*tmp;
 	char	prefix[width + 1];
@@ -48,7 +48,7 @@ int				ft_apply_width(char **s, t_flags flags, int width)
 		ft_memset(prefix, '0', width);
 	if (ft_strchr(flags.attributes, '-'))
 	{
-		if (!(*s = ft_strjoin(*s, prefix)))
+		if (!(*s = ft_check_null_char(*s, prefix, flags, len)))
 			return (1);
 	}
 	else if (ft_strchr(flags.attributes, '0') && ((ft_strchr(flags.attributes, '#')
@@ -117,7 +117,7 @@ int		ft_apply_attrib(char **s, t_flags flags, int *len)
 			return (0);
 	}
 	if ((width = flags.width - ft_strlen(*s) - *len) > 0)
-		if (!ft_apply_width(s, flags, width))
+		if (!ft_apply_width(s, flags, width, len))
 			return (0);
 	return (1);
 }
