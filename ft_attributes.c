@@ -6,65 +6,11 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/11 01:02:14 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/11 18:25:57 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char			*ft_move_prefix(char *s, char *prefix, t_flags flags)
-{
-	char	*del;
-	char	*tmp;
-	char	*str;
-
-	tmp = ft_strchr("Xxbp", flags.format) ? ft_strsub(s, 2, ft_strlen(s) - 2)
-		: ft_strsub(s, 1, ft_strlen(s) - 1);
-	if (!tmp)
-		return (NULL);
-	if (!(del = ft_strjoin(prefix, tmp)))
-		return (NULL);
-	ft_strdel(&tmp);
-	tmp = ft_strchr("Xxbp", flags.format) ? ft_strndup(s, 2) : ft_strndup(s, 1);
-	if (!tmp)
-		return (NULL);
-	if (!(str = ft_strjoin(tmp, del)))
-		return (NULL);
-	ft_varchar_free(2, &tmp, &del);
-	return (str);
-}
-
-int				ft_apply_width(char **s, t_flags flags, int width, int *len)
-{
-	char	*tmp;
-	char	prefix[width + 1];
-
-	ft_memset(prefix, ' ', width);
-	prefix[width] = '\0';
-	tmp = *s;
-	if (ft_strchr(flags.attributes, '0') && !ft_strchr(flags.attributes, '-')
-			&& !(ft_strchr("diOouUxXbp", flags.format) && flags.precision <\
-				flags.width && flags.precision != -1))
-		ft_memset(prefix, '0', width);
-	if (ft_strchr(flags.attributes, '-'))
-	{
-		if (!(*s = ft_check_null_char(*s, prefix, flags, len)))
-			return (1);
-	}
-	else if (ft_strchr(flags.attributes, '0') && ((ft_strchr(flags.attributes, '#')
-			&& ft_strchr("OoxXb", flags.format) && !(ft_strlen(*s) == 1 && s[0][0] == '0'))
-				|| flags.format == 'p' || (ft_strchr("+- ", s[0][0]) && ft_strchr("Ddi", flags.format)))
-					&& !(ft_strchr("diOouUxXbp", flags.format) && flags.precision < flags.width
-						&& flags.precision != -1))
-	{
-		if (!(*s = ft_move_prefix(*s, prefix, flags)))
-			return (0);
-	}
-	else if (!(*s = ft_strjoin(prefix, *s)))
-		return (0);
-	//ft_strdel(&tmp);
-	return (1);
-}
 
 int				ft_sign_attrib(char **s, t_flags flags)
 {

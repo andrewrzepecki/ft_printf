@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 17:33:39 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/08 18:08:14 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/11 20:17:42 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int			ft_apply_precision(char **s, t_flags flags)
 		return (1);
 	if (flags.format == 's')
 	{
-		tmp = *s;
-		if (!(*s = ft_strndup(*s, flags.precision)))
+		if (!(tmp = ft_strndup(*s, flags.precision)))
 			return (0);
-		//ft_strdel(&tmp);
+		//ft_strdel(&(*s));
+        *s = tmp;
 	}
 	else if (((len = ft_strlen(*s)) <= flags.precision || (!flags.precision
 					&& !ft_strcmp(*s, "0"))) && ft_strchr("DdiOoUuxXpb", flags.format))

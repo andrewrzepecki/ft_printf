@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 12:41:48 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/11 01:08:17 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/11 17:20:38 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ long long int       ft_apply_modifier(va_list ap, t_flags flags);
 int             	ft_apply_precision(char **s, t_flags flags);
 int             	ft_apply_attrib(char **s, t_flags flags, int *len);
 int             	ft_apply_width(char **s, t_flags flags, int width, int *len);
-char                *ft_check_null_char(char *s, char *prefix, t_flags flags, int *len);
+int                 ft_invert_prefix(char **s, char *prefix, t_flags flags, int *len);
 
 char				*ft_unsigned_value(unsigned long long d, t_flags flags);
 void            	ft_varchar_free(int nb, ...);

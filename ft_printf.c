@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/11 00:52:44 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/11 19:27:25 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int             ft_write_stdo(char **buff, const char *s, char *v, int *len)
     i = 0;
     while (i < len[VLEN])
         (*buff)[len[RETURN]++] = v[i++];
-    (*buff)[len[RETURN] + 1] = '\0';
+    (*buff)[len[RETURN]] = '\0';
     return (1);
 }
 
