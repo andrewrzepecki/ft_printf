@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:16:01 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/08 17:32:08 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/13 15:33:06 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@ t_get_format		*set_flag_tab(void)
 	if (!(tab[0].format = ft_strdup("#+-0 ")))
 		return (NULL);
 	tab[0].f = &get_attribute_flag;
-	if (!(tab[1].format = ft_strdup("0123456789")))
+    tab[0].fnum = NULL;
+	if (!(tab[1].format = ft_strdup("hlLjtz")))
 		return (NULL);
-	tab[1].f = &get_width_flag;
+	tab[1].f = &get_modifier_flag;
+    tab[1].fnum = NULL;
 	if (!(tab[2].format = ft_strdup(".")))
 		return (NULL);
-	tab[2].f = &get_precision_flag;
-	if (!(tab[3].format = ft_strdup("hlLjtz")))
+    tab[2].f = NULL;
+	tab[2].fnum = &get_precision_flag;
+	if (!(tab[3].format = ft_strdup("*0123456789")))
 		return (NULL);
-	tab[3].f = &get_modifier_flag;
+    tab[3].f = NULL;
+	tab[3].fnum = &get_width_flag;
 	return (tab);
 }
 

@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/11 18:25:57 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/13 17:00:18 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int				ft_hash_attrib(char **s, t_flags flags)
 {
 	char	*tmp;
 
-	if (ft_strchr("pxXbOo", flags.format) == NULL || (!ft_strcmp(*s, "0") && flags.format != 'p')
-			|| (!ft_strlen(*s) && !ft_strchr("Oo", flags.format)))
+	if (ft_strchr("pxXbOo", flags.format) == NULL || (!ft_strcmp(*s, "0") && flags.format != 'p') 
+                || (!ft_strlen(*s) && !ft_strchr("Oop", flags.format)))
 		return (1);
 	tmp = *s;
 	if (ft_strchr("xXp", flags.format))

@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/07 15:46:35 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:09:56 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ int				get_modifier_flag(t_flags *flags, char const *format, int *i)
 	return (0);
 }
 
-int				get_precision_flag(t_flags *flags, char const *format, int *i)
+int				get_precision_flag(t_flags *flags, char const *format, int *i, va_list ap)
 {
 	(*i)++;
+    if (format[*i] == '*')
+        return (ft_precision_wildcard(flags, ap));
 	flags->precision = ft_atoi(&format[*i]);
 	while (format[*i] >= '0' && format[*i] <= '9')
 		(*i)++;
@@ -63,8 +65,10 @@ int				get_precision_flag(t_flags *flags, char const *format, int *i)
 	return (0);
 }
 
-int				get_width_flag(t_flags *flags, char const *format, int *i)
+int				get_width_flag(t_flags *flags, char const *format, int *i, va_list ap)
 {
+    if (format[*i] == '*')
+        return (ft_width_wildcard(flags, ap));
 	flags->width = ft_atoi(&(format[*i]));
 	while (format[*i] >= '0' && format[*i] <= '9')
 		(*i)++;
@@ -72,7 +76,7 @@ int				get_width_flag(t_flags *flags, char const *format, int *i)
 	return (0);
 }
 
-int				ft_format_parser(t_flags *flags, const char *format)
+int				ft_format_parser(t_flags *flags, const char *format, va_list ap)
 {
 	int				i;
 	int				j;
@@ -81,14 +85,16 @@ int				ft_format_parser(t_flags *flags, const char *format)
 	i = 1;
 	if (!(g_format_tab = set_flag_tab()))
 		return (-1);
-	while (ft_strchr("#+-0 .0123456789hlLtjz", format[i]) && format[i])
+	while (ft_strchr("*#+-0 .0123456789hlLtjz", format[i]) && format[i])
 	{
 		j = -1;
 		while (++j < 4)
 			if (ft_strchr(g_format_tab[j].format, format[i]))
 			{
-				if (g_format_tab[j].f(flags, format, &i) == -1)
-					return (-1);
+                j = j < 2 ? g_format_tab[j].f(flags, format, &i) :
+                    g_format_tab[j].fnum(flags, format, &i, ap);
+		        if (j == -1)
+	                return (-1);
 				break ;
 			}
 		i++;

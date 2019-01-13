@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/11 19:27:25 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/12 16:54:38 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char            *ft_get_var(const char *format, va_list ap, int *len)
 	t_flags	flags;
 
 	flags = reset_flags();
-	if ((len[POSITION] = ft_format_parser(&flags, format)) == -1)
+	if ((len[POSITION] = ft_format_parser(&flags, format, ap)) == -1)
 		return (NULL);
 	if (!(var = ft_apply_flags(ap, flags, &len[VLEN])))
 		return (NULL);

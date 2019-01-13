@@ -6,7 +6,7 @@
 /*   By: andrewrzepecki <anrzepec@student.42.f      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 00:31:51 by andrewrze         #+#    #+#             */
-/*   Updated: 2019/01/11 20:14:59 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/13 17:16:54 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,4 @@ int				ft_apply_width(char **s, t_flags flags, int width, int *len)
                 flags.width && flags.precision != -1))
         ft_memset(prefix, '0', width);
     return (ft_invert_prefix(&(*s), prefix, flags, len));
-    // return (ft_move_prefix(*s, prefix, flags));
 }
