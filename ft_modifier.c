@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 17:43:03 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/09 16:39:10 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/15 14:22:34 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ unsigned long long		ft_apply_umodifier(va_list ap, t_flags flags)
 	unsigned long long int	d;
 
 	d = 0;
-	if (!flags.modifier && !ft_strchr("Up", flags.format))
+	if (!flags.modifier && !ft_strchr("OUp", flags.format))
 		d = va_arg(ap, unsigned int);
-	else if (ft_strchr("Uup", flags.format))
+	else if (ft_strchr("OUp", flags.format))
 		d = va_arg(ap, unsigned long long int);
 	else if (ft_strlen(flags.modifier) == 2 || ft_strchr(flags.modifier, 'j')
 			|| ft_strchr(flags.modifier, 'z'))
@@ -35,8 +35,10 @@ unsigned long long		ft_apply_umodifier(va_list ap, t_flags flags)
 		if (flags.modifier[0] == 'l')
 			d = va_arg(ap, unsigned long int);
 		else if (flags.modifier[0] != 'L')
-			d = va_arg(ap, unsigned int);
-		else
+			d = (unsigned short)va_arg(ap, unsigned int);
+		else if (flags.format == 'o')
+            d = (unsigned char)va_arg(ap, unsigned int);
+        else
 			d = va_arg(ap, unsigned int);
 	}
 	return (d);

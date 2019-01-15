@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/13 16:09:56 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/15 13:26:24 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int				get_attribute_flag(t_flags *flags, char const *format, int *i)
 
 int				get_modifier_flag(t_flags *flags, char const *format, int *i)
 {
+    if (flags->modifier && (!ft_strcmp("z", flags->modifier) 
+                || !ft_strcmp("j", flags->modifier)))
+        return (0);
 	if (flags->modifier)
 		ft_strdel(&flags->modifier);
 	if (format[*i + 1] == format[*i] && format[*i] != 'L')
