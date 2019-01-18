@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 17:43:03 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/15 14:22:34 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/18 10:50:57 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ unsigned long long		ft_apply_umodifier(va_list ap, t_flags flags)
 		else if (flags.modifier[0] != 'L')
 			d = (unsigned short)va_arg(ap, unsigned int);
 		else if (flags.format == 'o')
-            d = (unsigned char)va_arg(ap, unsigned int);
-        else
+			d = (unsigned char)va_arg(ap, unsigned int);
+		else
 			d = va_arg(ap, unsigned int);
 	}
 	return (d);
@@ -55,7 +55,8 @@ long long int			ft_apply_modifier(va_list ap, t_flags flags)
 			|| ft_strchr(flags.modifier, 'j') || ft_strchr(flags.modifier, 'z'))
 	{
 		if (flags.format == 'D' || flags.modifier[0] == 'l'
-				|| ft_strchr(flags.modifier, 'j') || ft_strchr(flags.modifier, 'z'))
+				|| ft_strchr(flags.modifier, 'j')
+				|| ft_strchr(flags.modifier, 'z'))
 			d = va_arg(ap, long long int);
 		else
 			d = (char)va_arg(ap, int);

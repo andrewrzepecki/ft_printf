@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/15 13:26:24 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/18 10:46:19 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int				get_attribute_flag(t_flags *flags, char const *format, int *i)
 
 int				get_modifier_flag(t_flags *flags, char const *format, int *i)
 {
-    if (flags->modifier && (!ft_strcmp("z", flags->modifier) 
-                || !ft_strcmp("j", flags->modifier)))
-        return (0);
+	if (flags->modifier && (!ft_strcmp("z", flags->modifier)
+				|| !ft_strcmp("j", flags->modifier)))
+		return (0);
 	if (flags->modifier)
 		ft_strdel(&flags->modifier);
 	if (format[*i + 1] == format[*i] && format[*i] != 'L')
@@ -56,11 +56,12 @@ int				get_modifier_flag(t_flags *flags, char const *format, int *i)
 	return (0);
 }
 
-int				get_precision_flag(t_flags *flags, char const *format, int *i, va_list ap)
+int				get_precision_flag(t_flags *flags, char const *format,
+				int *i, va_list ap)
 {
 	(*i)++;
-    if (format[*i] == '*')
-        return (ft_precision_wildcard(flags, ap));
+	if (format[*i] == '*')
+		return (ft_precision_wildcard(flags, ap));
 	flags->precision = ft_atoi(&format[*i]);
 	while (format[*i] >= '0' && format[*i] <= '9')
 		(*i)++;
@@ -68,10 +69,11 @@ int				get_precision_flag(t_flags *flags, char const *format, int *i, va_list ap
 	return (0);
 }
 
-int				get_width_flag(t_flags *flags, char const *format, int *i, va_list ap)
+int				get_width_flag(t_flags *flags, char const *format,
+				int *i, va_list ap)
 {
-    if (format[*i] == '*')
-        return (ft_width_wildcard(flags, ap));
+	if (format[*i] == '*')
+		return (ft_width_wildcard(flags, ap));
 	flags->width = ft_atoi(&(format[*i]));
 	while (format[*i] >= '0' && format[*i] <= '9')
 		(*i)++;
@@ -94,10 +96,10 @@ int				ft_format_parser(t_flags *flags, const char *format, va_list ap)
 		while (++j < 4)
 			if (ft_strchr(g_format_tab[j].format, format[i]))
 			{
-                j = j < 2 ? g_format_tab[j].f(flags, format, &i) :
-                    g_format_tab[j].fnum(flags, format, &i, ap);
-		        if (j == -1)
-	                return (-1);
+				j = j < 2 ? g_format_tab[j].f(flags, format, &i) :
+					g_format_tab[j].fnum(flags, format, &i, ap);
+				if (j == -1)
+					return (-1);
 				break ;
 			}
 		i++;

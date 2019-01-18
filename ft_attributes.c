@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 14:15:06 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/13 17:00:18 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/18 10:48:42 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int				ft_hash_attrib(char **s, t_flags flags)
 {
 	char	*tmp;
 
-	if (ft_strchr("pxXbOo", flags.format) == NULL || (!ft_strcmp(*s, "0") && flags.format != 'p') 
-                || (!ft_strlen(*s) && !ft_strchr("Oop", flags.format)))
+	if (ft_strchr("pxXbOo", flags.format) == NULL || (!ft_strcmp(*s, "0")
+				&& flags.format != 'p') || (!ft_strlen(*s)
+					&& !ft_strchr("Oop", flags.format)))
 		return (1);
 	tmp = *s;
 	if (ft_strchr("xXp", flags.format))
@@ -48,12 +49,12 @@ int				ft_hash_attrib(char **s, t_flags flags)
 	return (1);
 }
 
-int		ft_apply_attrib(char **s, t_flags flags, int *len)
+int				ft_apply_attrib(char **s, t_flags flags, int *len)
 {
 	int	width;
 
 	if ((ft_strchr(flags.attributes, '#') || flags.format == 'p')
-			&& !(flags.format == 'o' && (int)ft_strlen(*s) == flags.precision 
+			&& !(flags.format == 'o' && (int)ft_strlen(*s) == flags.precision
 				&& s[0][0] == '0'))
 		if (!ft_hash_attrib(s, flags))
 			return (0);

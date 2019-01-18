@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/13 17:26:49 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/01/18 10:47:15 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ char			*ft_numeric_var(va_list ap, t_flags flags)
 		return (NULL);
 	return (s);
 }
-
-//  Main function for fetching variable value, applying precision,
-// then sending to attributes & width applier.
 
 char			*ft_apply_flags(va_list ap, t_flags flags, int *len)
 {
