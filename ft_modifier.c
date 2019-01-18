@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 17:43:03 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/18 10:50:57 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/18 13:29:27 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,16 @@ long long int			ft_apply_modifier(va_list ap, t_flags flags)
 		else
 			d = va_arg(ap, int);
 	}
+	return (d);
+}
+
+long double				ft_double_modifier(va_list ap, t_flags flags)
+{
+	long double		d;
+
+	if (!flags.modifier || flags.modfier[0] == 'l')
+		d = (long double)va_arg(ap, double);
+	else
+		d = va_arg(ap, long double);
 	return (d);
 }

@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 12:41:48 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/18 11:08:23 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/18 13:29:15 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int					ft_format_parser(t_flags *flags, const char *format,
 char				*ft_apply_flags(va_list ap, t_flags flags, int *len);
 unsigned long long	ft_apply_umodifier(va_list ap, t_flags flags);
 long long int		ft_apply_modifier(va_list ap, t_flags flags);
+long double			ft_double_modifier(va_list ap, t_flags flags);
 int					ft_apply_precision(char **s, t_flags flags);
 int					ft_apply_attrib(char **s, t_flags flags, int *len);
 int					ft_apply_width(char **s, t_flags flags, int width,
