@@ -9,7 +9,9 @@ int    main(void)
     printf("{%.0d}'n", 42);
     ft_printf("{%.0d}\n", 42);*/
 
-    ft_printf("%o, %ho, %hho\n", -42, -42, -42);
-    printf("%o, %ho, %hho\n", -42, -42, -42);
+	long double lf;
+
+	lf = 1.42444252;
+	printf("%.16Lf\n %.0f\n", lf, 1.42424242);
     return (0);
 }

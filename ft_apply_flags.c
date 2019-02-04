@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/18 13:27:52 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:05:36 by andrewrze        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char			*ft_float_var(va_list ap, t_flags flags)
 	char			*s;
 	char			tmp;
 
-	flt = ft_double_modifier(va_list ap, t_flags flags);
+	flt = ft_double_modifier(ap, flags);
 	if (!(s = ft_double_toa(flt)))
 		return (NULL);
 	if (flags.precision != -1)
