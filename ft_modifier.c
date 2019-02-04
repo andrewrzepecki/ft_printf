@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 17:43:03 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/19 11:32:15 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/02/04 11:09:00 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ long double				ft_double_modifier(va_list ap, t_flags flags)
 {
 	long double		d;
 
-	if (!flags.modifier || flags.modfier[0] == 'l')
+	if (!flags.modifier || flags.modifier[0] == 'l')
 		d = (long double)va_arg(ap, double);
 	else
 		d = va_arg(ap, long double);

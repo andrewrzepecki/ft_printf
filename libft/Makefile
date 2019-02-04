@@ -6,13 +6,15 @@
 #    By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/17 19:12:20 by anrzepec          #+#    #+#              #
-#    Updated: 2019/01/02 15:29:46 by andrewrze        ###   ########.fr        #
+#    Updated: 2019/02/04 11:08:26 by anrzepec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= 	libft.a
 
-SRC 	= ft_uitoa_base.c \
+SRC 	= ft_ftoa.c \
+		  ft_fmod.c \
+		  ft_uitoa_base.c \
 		  ft_itoa_base.c \
 		  ft_strrev.c \
 		  char_count.c \

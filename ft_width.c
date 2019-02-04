@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:54:51 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/18 10:59:36 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/04 15:41:02 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			ft_move_prefix(char **s, char *prefix, t_flags flags)
 	if (ft_strchr(flags.attributes, '0') && ((ft_strchr(flags.attributes, '#')
 		&& ft_strchr("OoxXb", flags.format) && !(ft_strlen(*s) == 1
 			&& s[0][0] == '0')) || flags.format == 'p'
-			|| (ft_strchr("+- ", s[0][0]) && ft_strchr("Ddi", flags.format)))
+			|| (ft_strchr("+- ", s[0][0]) && ft_strchr("Ddif", flags.format)))
 			&& !(ft_strchr("diOouUxXbp", flags.format)
 			&& flags.precision < flags.width && flags.precision != -1))
 	{
@@ -81,8 +81,8 @@ int			ft_apply_width(char **s, t_flags flags, int width, int *len)
 	ft_memset(prefix, ' ', width);
 	prefix[width] = '\0';
 	if (ft_strchr(flags.attributes, '0') && !ft_strchr(flags.attributes, '-')
-			&& !(ft_strchr("diOouUxXbp", flags.format) && flags.precision <\
-				flags.width && flags.precision != -1))
+			&& (!(ft_strchr("diOouUxXbpf", flags.format) && flags.precision <\
+				flags.width && flags.precision != -1) || flags.format == 'f'))
 		ft_memset(prefix, '0', width);
 	return (ft_invert_prefix(&(*s), prefix, flags, len));
 }

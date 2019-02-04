@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/01/18 18:05:36 by andrewrze        ###   ########.fr       */
+/*   Updated: 2019/02/04 15:21:17 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ char			*ft_float_var(va_list ap, t_flags flags)
 {
 	long double		flt;
 	char			*s;
-	char			tmp;
 
 	flt = ft_double_modifier(ap, flags);
-	if (!(s = ft_double_toa(flt)))
-		return (NULL);
-	if (flags.precision != -1)
-		if (!(tmp = ft_apply_float_precision(s, flags.precision)))
+	if (flags.precision == -1)
+	{
+		if (!(s = ft_ftoa(flt, 6)))
 			return (NULL);
+	}
+	else if (!(s = ft_ftoa(flt, flags.precision)))
+		return (NULL);
 	return (s);
 }
 
@@ -87,7 +88,7 @@ char			*ft_apply_flags(va_list ap, t_flags flags, int *len)
 
 	if (!(tab = set_struct_tab()))
 		return (NULL);
-	if (ft_strchr("DdiOoUuxXpbsf", flags.format))
+	if (ft_strchr("DdiOoUuxXpbsf", flags.format) && flags.format)
 	{
 		i = -1;
 		while (++i < 3)
