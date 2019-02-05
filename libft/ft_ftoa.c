@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:19:07 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/05 12:05:30 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:17:12 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char		*ft_floating_right(long double mod, int precision)
 
 char		*ft_ftoa(long double nb, int precision)
 {
+	char		*tmp;
 	char		*left;
 	char		*right;
 	long long	ent;
@@ -76,7 +77,16 @@ char		*ft_ftoa(long double nb, int precision)
 	}
 	else if (!(right = ft_floating_right(mod, precision)))
 		return (NULL);
+	if (!precision && ent > nb && ent != 0)
+		ent++;
 	if (!(left = ft_itoa_base(ent, "0123456789")))
 		return (NULL);
+	if (!ent && ent > nb)
+	{
+		tmp = left;
+		if (!(left = ft_strjoin("-", left)))
+			return (NULL);
+		ft_strdel(&tmp);
+	}
 	return (ft_fjoin(left, right));
 }

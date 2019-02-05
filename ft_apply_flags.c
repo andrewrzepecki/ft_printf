@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/04 15:21:17 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:15:29 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char			*ft_char_var(va_list ap, t_flags flags, int *len)
 {
 	char	*s;
 
+	s = NULL;
 	if (!(s = ft_memalloc(2)))
 		return (NULL);
 	if (flags.format == 'c')
@@ -101,5 +102,7 @@ char			*ft_apply_flags(va_list ap, t_flags flags, int *len)
 	if (!(ft_apply_attrib(&s, flags, len)))
 		return (NULL);
 	*len += ft_strlen(s);
+	if (!flags.format)
+		*len = 0;
 	return (s);
 }

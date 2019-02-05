@@ -22,15 +22,17 @@ int    main(void)
 	ft_printf("{%.50f}\n", 1.46464662);
 	printf("{%.50f}\n", 1.46464662);*/
 
-	nb = printf("%.2s, %.f\n", 0, 1.499998);
+/*	nb = printf("%.2s, %.f\n", 0, 0.499998);
 	printf("Ret = %d\n", nb);
-	nb = ft_printf("%.2s, %.f\n", 0, -0.499998);
+	nb = ft_printf("%.2s, %.f\n", 0, 0.499998);
 	printf("Ret = %.4f\n", 0.0001);
 	ft_printf("Ret = %.4f\n", 0.0001);
 	printf("%.f\n", -0.00000001);
 	ft_printf("%.f\n", -0.00000001);
-	printf("%lf\n", 32135351335351351.3538435);
-	ft_printf("%lf\n", 32135351335351351.3538435);
-
+	printf("%.0f\n", 3213535133535139999.353843599);
+	ft_printf("%.0f\n", 3213535133535139999.353843599);
+*/	
+	printf("% ");
+	ft_printf("% ");
     return (0);
 }

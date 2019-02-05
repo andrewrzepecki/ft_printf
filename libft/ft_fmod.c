@@ -6,16 +6,17 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:25:08 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/05 12:44:06 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/05 16:08:37 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int fast_floor(long double x) 
+long long			fast_floor(long double x) 
 {
-	int xi;
-	xi = (int)x;
+	long long	xi;
+
+	xi = (long long)x;
 	return (x < xi ? xi - 1 : xi);
 }
 
