@@ -1,6 +1,7 @@
 #include "../ft_printf.h"
 #include <stdio.h>
 #include <stdint.h>
+#include <float.h>
 
 int    main(void)
 {
@@ -23,8 +24,13 @@ int    main(void)
 
 	nb = printf("%.2s, %.f\n", 0, 1.499998);
 	printf("Ret = %d\n", nb);
-	nb = ft_printf("%.2s, %.f\n", 0, 1.499998);
-	printf("Ret = %d\n", nb);
+	nb = ft_printf("%.2s, %.f\n", 0, -0.499998);
+	printf("Ret = %.4f\n", 0.0001);
+	ft_printf("Ret = %.4f\n", 0.0001);
+	printf("%.f\n", -0.00000001);
+	ft_printf("%.f\n", -0.00000001);
+	printf("%lf\n", 32135351335351351.3538435);
+	ft_printf("%lf\n", 32135351335351351.3538435);
 
     return (0);
 }

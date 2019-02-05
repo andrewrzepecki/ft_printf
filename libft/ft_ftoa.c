@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:19:07 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/04 18:30:26 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:05:30 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@ char		*ft_fjoin(char *s1, char *s2)
 	char	*tmp;
 	char	*res;
 
-	if (!(tmp = ft_strjoin(s1, ".")))
-		return (NULL);
-	ft_strdel(&s1);
-	if (!(res = ft_strjoin(tmp, s2)))
-		return (NULL);
+	if (ft_strlen(s2))
+	{
+		if (!(tmp = ft_strjoin(s1, ".")))
+			return (NULL);
+		ft_strdel(&s1);
+		if (!(res = ft_strjoin(tmp, s2)))
+			return (NULL);
+		ft_strdel(&s2);
+		ft_strdel(&tmp);
+		return (res);
+	}
 	ft_strdel(&s2);
-	ft_strdel(&tmp);
-	return (res);
+	return (s1);
 }
 
 char		*ft_floating_right(long double mod, int precision)
