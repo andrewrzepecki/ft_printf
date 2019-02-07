@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 17:23:21 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/07 16:30:48 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:21:19 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int				get_width_flag(t_flags *flags, char const *format,
 	return (0);
 }
 
-int				ft_format_parser(t_flags *flags, const char *format, va_list ap, t_get_format *g_format_tab)
+int				ft_format_parser(t_flags *flags, const char *format, va_list ap,
+		t_get_format *g_format_tab)
 {
 	int				i;
 	int				j;

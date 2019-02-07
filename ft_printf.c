@@ -6,11 +6,18 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/07 17:34:30 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:32:16 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void			ft_printf_output(char **buff, va_list ap, int len)
+{
+	write(1, *buff, len);
+	ft_strdel(buff);
+	va_end(ap);
+}
 
 char			*ft_add_buffsize(char *buff, int *len)
 {
@@ -54,7 +61,8 @@ char			*ft_get_var(const char *format, va_list ap, int *len)
 	flags = reset_flags();
 	if (!(g_format_tab = set_flag_tab()))
 		return (NULL);
-	if ((len[POSITION] = ft_format_parser(&flags, format, ap, g_format_tab)) == -1)
+	if ((len[POSITION] = ft_format_parser(&flags, format, ap, g_format_tab))
+			== -1)
 		return (NULL);
 	if (!(var = ft_apply_flags(ap, flags, &len[VLEN])))
 		return (NULL);
@@ -88,8 +96,6 @@ int				ft_printf(const char *format, ...)
 		format = format + len[INDEX] + len[POSITION];
 		ft_strdel(&var);
 	}
-	write(1, buff, len[RETURN]);
-	ft_strdel(&buff);
-	va_end(ap);
+	ft_printf_output(&buff, ap, len[RETURN]);
 	return (len[RETURN]);
 }
