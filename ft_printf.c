@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/07 16:35:10 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:34:30 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int				ft_printf(const char *format, ...)
 	buff = NULL;
 	while (format[(len[INDEX] = 0)])
 	{
+		var = NULL;
 		len[VLEN] = 0;
 		len[POSITION] = 0;
 		while (format[len[INDEX]] != '%' && format[len[INDEX]])
@@ -85,6 +86,7 @@ int				ft_printf(const char *format, ...)
 		if (ft_write_stdo(&buff, format, var, len) < 0)
 			return (-1);
 		format = format + len[INDEX] + len[POSITION];
+		ft_strdel(&var);
 	}
 	write(1, buff, len[RETURN]);
 	ft_strdel(&buff);
