@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:19:07 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/05 16:17:12 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:27:43 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,66 @@ char		*ft_fjoin(char *s1, char *s2)
 	return (s1);
 }
 
+char		*set_left(long double nb, long double ent, int len, char *num)
+{
+	char		*tmp;
+	char		*s;
+
+	if (!(s = ft_memalloc(1)))
+		return (NULL);
+	while (len--)
+	{
+		num[0] = (int)nb + '0';
+		tmp = s;
+		if (!(s = ft_strjoin(s, num)))
+			return (NULL);
+		ft_strdel(&tmp);
+		nb = (nb * 10) - ((int)nb * 10);
+	}
+	if (ent < 0)
+	{
+		tmp = s;
+		if (!(s = ft_strjoin("-", s)))
+			return (NULL);
+		ft_strdel(&tmp);
+	}
+	return (s);
+}
+
+char		*ft_floating_left(long double nb, long double ent, int precision)
+{
+	int		i;
+	char	*s;
+	char	num[2];
+
+	i = 1;
+	num[1] = '\0';
+	if (!precision && ent > nb && ent)
+		nb++;
+	ent = nb;
+	nb = nb < 0 ? -nb : nb;
+	while (nb > 10)
+	{
+		nb = nb / 10;
+		i++;
+	}
+	if (!(s = set_left(nb, ent, i, num)))
+		return (NULL);
+	return (s);
+}
+
 char		*ft_floating_right(long double mod, int precision)
 {
 	int		i;
 	char	*s;
-	char	*num;
+	char	num[2];
 	char	*tmp;
 
 	i = 0;
 	if (!(s = ft_memalloc(1)))
 		return (NULL);
 	mod = (mod < 0) ? mod * -1 : mod;
-	if (!(num = ft_memalloc(2)))
-		return (NULL);
+	num[1] = '\0';
 	while (i++ < precision)
 	{
 		mod = ft_fmod(mod * 10, 10);
@@ -61,14 +108,13 @@ char		*ft_floating_right(long double mod, int precision)
 
 char		*ft_ftoa(long double nb, int precision)
 {
-	char		*tmp;
 	char		*left;
 	char		*right;
-	long long	ent;
+	long double	ent;
 	long double	mod;
 
-	ent = (long long)(nb);
-	mod = nb - ent;
+	mod = ft_fmod(nb, 1);
+	ent = nb - mod;
 	if (!mod)
 	{
 		if (!(right = ft_memalloc(precision + 1)))
@@ -79,14 +125,7 @@ char		*ft_ftoa(long double nb, int precision)
 		return (NULL);
 	if (!precision && ent > nb && ent != 0)
 		ent++;
-	if (!(left = ft_itoa_base(ent, "0123456789")))
+	if (!(left = ft_floating_left(nb, ent, precision)))
 		return (NULL);
-	if (!ent && ent > nb)
-	{
-		tmp = left;
-		if (!(left = ft_strjoin("-", left)))
-			return (NULL);
-		ft_strdel(&tmp);
-	}
 	return (ft_fjoin(left, right));
 }

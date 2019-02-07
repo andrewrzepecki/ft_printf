@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 18:16:01 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/04 12:22:33 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 15:14:41 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ t_get_format		*set_flag_tab(void)
 	return (tab);
 }
 
+void				free_flag_tab(t_get_format *tab)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+		ft_strdel(&(tab[i].format));
+	free(tab);
+}
+
 t_var				*set_struct_tab(void)
 {
 	t_var	*tab;
@@ -55,6 +65,16 @@ t_var				*set_struct_tab(void)
 	return (tab);
 }
 
+void				free_struct_tab(t_var *tab)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 3)
+		ft_strdel(&(tab[i].format));
+	free(tab);
+}
+
 t_flags				reset_flags(void)
 {
 	t_flags	flags;
@@ -65,6 +85,12 @@ t_flags				reset_flags(void)
 	flags.modifier = NULL;
 	flags.format = 0;
 	return (flags);
+}
+
+void			free_current_flags(t_flags *flags)
+{
+	ft_strdel(&(flags->attributes));
+	ft_strdel(&(flags->modifier));
 }
 
 void				ft_varchar_free(int nb, ...)

@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:54:51 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/05 16:44:18 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:23:22 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int			ft_add_prefix(char **s, char *prefix)
 {
 	char	*tmp;
 
-	if (!(tmp = ft_strjoin(prefix, *s)))
+	tmp = *s;
+	if (!(*s = ft_strjoin(prefix, *s)))
 		return (0);
-	// ft_strdel(&s[0]);
-	*s = tmp;
+	ft_strdel(&tmp);
 	return (1);
 }
 
@@ -49,29 +49,29 @@ int			ft_move_prefix(char **s, char *prefix, t_flags flags)
 		ft_varchar_free(2, &tmp, &del);
 		return (1);
 	}
-	return (ft_add_prefix(&(*s), prefix));
+	return (ft_add_prefix(s, prefix));
 }
 
 int			ft_invert_prefix(char **s, char *prefix, t_flags flags, int *len)
 {
 	char	*tmp;
 
+	tmp = *s;
 	if (ft_strchr(flags.attributes, '-'))
 	{
 		if (flags.format == 'c' && *s && s[0][0] == '\0')
 		{
-			if (!(tmp = ft_memalloc(ft_strlen(prefix) + 2)))
+			if (!(*s = ft_memalloc(ft_strlen(prefix) + 2)))
 				return (0);
-			ft_memcpy(tmp + 1, prefix, ft_strlen(prefix));
+			ft_memcpy(*s + 1, prefix, ft_strlen(prefix));
 			*len += ft_strlen(prefix);
 		}
-		else if (!(tmp = ft_strjoin(*s, prefix)))
+		else if (!(*s = ft_strjoin(*s, prefix)))
 			return (0);
-		// free(*s);
-		*s = tmp;
+		ft_strdel(&tmp);
 		return (1);
 	}
-	return (ft_move_prefix(&(*s), prefix, flags));
+	return (ft_move_prefix(s, prefix, flags));
 }
 
 int			ft_apply_width(char **s, t_flags flags, int width, int *len)
@@ -84,5 +84,5 @@ int			ft_apply_width(char **s, t_flags flags, int width, int *len)
 			&& (!(ft_strchr("diOouUxXbpf", flags.format) && flags.precision <\
 				flags.width && flags.precision != -1) || flags.format == 'f'))
 		ft_memset(prefix, '0', width);
-	return (ft_invert_prefix(&(*s), prefix, flags, len));
+	return (ft_invert_prefix(s, prefix, flags, len));
 }

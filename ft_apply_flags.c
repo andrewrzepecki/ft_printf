@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:09:42 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/05 17:15:29 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:29:24 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char			*ft_str_var(va_list ap, t_flags flags)
 	if (!(s = (char*)va_arg(ap, char *)))
 		if (!(s = ft_strdup("(null)")))
 			return (NULL);
+	if (!(s = ft_strdup(s)))
+		return (NULL);
 	if (!ft_apply_precision(&s, flags))
 		return (NULL);
 	return (s);
@@ -104,5 +106,6 @@ char			*ft_apply_flags(va_list ap, t_flags flags, int *len)
 	*len += ft_strlen(s);
 	if (!flags.format)
 		*len = 0;
+	free_struct_tab(tab);
 	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: anrzepec <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:50:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/05 17:13:41 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:35:10 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,19 @@ int				ft_write_stdo(char **buff, const char *s, char *v, int *len)
 
 char			*ft_get_var(const char *format, va_list ap, int *len)
 {
-	char	*var;
-	t_flags	flags;
+	char			*var;
+	t_flags			flags;
+	t_get_format	*g_format_tab;
 
 	flags = reset_flags();
-	if ((len[POSITION] = ft_format_parser(&flags, format, ap)) == -1)
+	if (!(g_format_tab = set_flag_tab()))
+		return (NULL);
+	if ((len[POSITION] = ft_format_parser(&flags, format, ap, g_format_tab)) == -1)
 		return (NULL);
 	if (!(var = ft_apply_flags(ap, flags, &len[VLEN])))
 		return (NULL);
+	free_flag_tab(g_format_tab);
+	free_current_flags(&flags);
 	return (var);
 }
 
@@ -82,6 +87,7 @@ int				ft_printf(const char *format, ...)
 		format = format + len[INDEX] + len[POSITION];
 	}
 	write(1, buff, len[RETURN]);
+	ft_strdel(&buff);
 	va_end(ap);
 	return (len[RETURN]);
 }
