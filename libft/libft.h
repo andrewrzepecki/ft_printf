@@ -6,7 +6,7 @@
 /*   By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:29 by anrzepec          #+#    #+#             */
-/*   Updated: 2019/02/04 11:08:11 by anrzepec         ###   ########.fr       */
+/*   Updated: 2019/02/08 12:06:51 by anrzepec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct		s_list
 }					t_list;
 
 char				*ft_ftoa(long double nb, int precision);
+
+long long			ft_floor(long double nb);
 
 long double			ft_fmod(long double nb, long double mod);
 

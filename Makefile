@@ -6,7 +6,7 @@
 #    By: anrzepec <anrzepec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/17 19:12:20 by anrzepec          #+#    #+#              #
-#    Updated: 2019/02/07 18:25:33 by anrzepec         ###   ########.fr        #
+#    Updated: 2019/02/08 12:07:11 by anrzepec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,31 @@ SRC 	= 	ft_printf.c \
 			format_parser.c \
 			ft_apply_flags.c \
 			ft_attributes.c \
-			ft_data_types.c \
+			ft_struct_settings.c \
 			ft_modifier.c \
 			ft_precision.c \
 			ft_width.c		\
 			ft_wildcard.c	\
-			ft_tools.c
-
+			ft_tools.c		\
+			libft/ft_strchr.c \
+			libft/ft_strlen.c \
+			libft/ft_strdel.c \
+			libft/ft_memset.c \
+			libft/ft_memcpy.c \
+			libft/ft_memalloc.c \
+			libft/ft_strdup.c \
+			libft/ft_strndup.c \
+			libft/ft_strjoin.c \
+			libft/ft_strcmp.c \
+			libft/ft_strsub.c \
+			libft/ft_atoi.c \
+			libft/ft_ftoa.c \
+			libft/ft_itoa_base.c \
+			libft/ft_uitoa_base.c \
+			libft/ft_fmod.c \
+			libft/ft_floor.c \
+			libft/ft_memdel.c
+			
 OBJS	=	$(SRC:.c=.o)
 
 CC		=	gcc 
@@ -33,30 +51,19 @@ RM		=	rm -f
 
 LIB		=	ar rc
 
-LPATH	=	libft/*.o
-
-all:		$(LIB) $(NAME)
+all:		$(NAME)
 
 %.o:		%.c	
 			$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIB):	
-			make -C libft/
-
 $(NAME):	$(OBJS)
-			$(LIB) $(NAME) $(OBJS) $(LPATH)
+			$(LIB) $(NAME) $(OBJS)
 
-fcleanlib:  cleanlib
-			make fclean -C libft/
-
-cleanlib:
-			make clean -C libft/
-
-clean:		cleanlib
+clean:
 			$(RM) $(OBJS)
 
-fclean:		fcleanlib clean
-			$(RM) $(NAME)
+fclean:
+			$(RM) $(OBJS) $(NAME)
 
 re:			fclean all
 
